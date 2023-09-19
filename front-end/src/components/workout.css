@@ -1,0 +1,34 @@
+.unit-workout {
+  width: 35vw;
+  border: 1px solid black;
+  margin: 10px;
+  /* padding: 10px ; */
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+}
+
+.unit-workout button {
+  background-color: none;
+  color: red;
+  border: 1px solid red;
+  padding: 3px 5px;
+  cursor: pointer;
+}
+form {
+  text-align: center;
+}
+input[type="text"] {
+  padding: 5px 25px;
+  display: block;
+  margin: 5px;
+}
+input[type="number"] {
+  padding: 5px 25px;
+  display: block;
+  margin: 5px;
+}
+input[type="submit"] {
+  padding: 5px 10px;
+  cursor: pointer;
+}
