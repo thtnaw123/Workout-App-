@@ -2,12 +2,22 @@
   width: 35vw;
   border: 1px solid black;
   margin: 10px;
-  /* padding: 10px ; */
+  /* padding: 10px;  */
   display: flex;
   justify-content: space-around;
   align-items: center;
+  border-radius: 10px;
+  padding: 10px 5px;
 }
-
+form {
+  /* margin-left: 100px; */
+  margin: 50px 0 50px 100px;
+  border-radius: 8%;
+  padding: 25px 100px 40px 100px;
+  box-shadow: 0px 4px 28px 1px rgba(0, 0, 0, 0.75);
+  -webkit-box-shadow: 0px 4px 28px 1px rgba(0, 0, 0, 0.75);
+  -moz-box-shadow: 0px 4px 28px 1px rgba(0, 0, 0, 0.75);
+}
 .unit-workout button {
   background-color: none;
   color: red;
@@ -19,16 +29,38 @@ form {
   text-align: center;
 }
 input[type="text"] {
-  padding: 5px 25px;
+  padding: 7px 30px;
+  display: block;
+  margin: 5px;
+}
+input[type="password"] {
+  padding: 7px 30px;
   display: block;
   margin: 5px;
 }
 input[type="number"] {
-  padding: 5px 25px;
+  padding: 7px 30px;
   display: block;
   margin: 5px;
 }
 input[type="submit"] {
-  padding: 5px 10px;
+  padding: 7px 30px;
   cursor: pointer;
+}
+
+.errorMsg {
+  width: 30%;
+  color: red;
+}
+
+button {
+  padding: 7px 30px;
+  cursor: pointer;
+}
+
+section {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: space-around;
 }

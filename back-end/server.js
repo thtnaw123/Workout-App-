@@ -4,6 +4,7 @@ const app = express();
 const cors = require("cors");
 const mongoose = require("mongoose");
 const workoutRoutes = require("./routes/workOut");
+const userRoutes = require("./routes/user");
 require("dotenv").config();
 
 app.use(cors());
@@ -14,7 +15,7 @@ app.use((req, res, next) => {
 });
 
 mongoose
-  .connect(process.env.MONGO_URL)
+  .connect(`${process.env.MONGO_URL}workout?authSource=admin`)
   .then(() => {
     console.log("db connected");
     app.listen(process.env.PORT, () => {
@@ -30,3 +31,4 @@ app.get("/", (req, res) => {
 });
 
 app.use("/api", workoutRoutes);
+app.use("/api/user", userRoutes);

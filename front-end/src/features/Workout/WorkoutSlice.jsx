@@ -1,6 +1,6 @@
 import { createSlice } from "@reduxjs/toolkit";
 
-const initialState = { workout: [] };
+const initialState = { workout: [], fetchDataFlag: false };
 
 const workoutSlices = createSlice({
   name: "workouts",
@@ -21,8 +21,12 @@ const workoutSlices = createSlice({
       console.log(newWorkouts);
       state.workout = [...newWorkouts];
     },
+    setDataFlag: (state, action) => {
+      state.fetchDataFlag = action.payload;
+    },
   },
 });
 
 export const workoutReducer = workoutSlices.reducer;
-export const { setWorkouts, addWorkout, deleteWorkout } = workoutSlices.actions;
+export const { setWorkouts, addWorkout, deleteWorkout, setDataFlag } =
+  workoutSlices.actions;

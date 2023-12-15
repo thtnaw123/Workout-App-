@@ -7,7 +7,12 @@ const {
   updateWorkOut,
 } = require("../controllers/workoutController");
 
+// const { requireAuth } = require("../middleware/requireAuth");
+const { allowAccessWithoutToken } = require("../middleware/requireAuth");
+
 const router = express.Router();
+
+router.use(allowAccessWithoutToken);
 
 //get all work out
 router.get("/workout", getAllWorkOuts);

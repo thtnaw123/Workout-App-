@@ -2,14 +2,23 @@ import React, { useEffect, useState } from "react";
 import client from "../api/axios";
 import "./workout.css";
 import { useDispatch, useSelector } from "react-redux";
-import { setWorkouts, deleteWorkout } from "../features/Workout/WorkoutSlice";
+import {
+  setWorkouts,
+  deleteWorkout,
+  setDataFlag,
+} from "../features/Workout/WorkoutSlice";
 
 const Workout = () => {
   const [error, setError] = useState("");
   const [isLoading, setIsLoading] = useState(true);
 
+  const user = JSON.parse(localStorage.getItem("user"));
+  const userId = user?.userId;
+
   const workouts = useSelector((state) => state.workouts.workout);
   const dispatch = useDispatch();
+  const fetchDataFlag = useSelector((state) => state.workouts.fetchDataFlag);
+  // const user = useSelector(selectUser);
 
   const handleDelete = async (workout) => {
     try {
@@ -26,7 +35,6 @@ const Workout = () => {
       try {
         const response = await client.get();
         dispatch(setWorkouts(response.data));
-        // console.log(workouts);
         // if (response) {
         //   console.log(response.data);
         // }
@@ -38,15 +46,19 @@ const Workout = () => {
       }
     };
     fetchWorkouts();
-  }, [workouts]);
+    dispatch(setDataFlag(false));
+  }, [fetchDataFlag]);
   return (
-    <div>
+    <div className="workoutContent">
       <h1>Workout </h1>
 
       {isLoading ? <h3>Loading...</h3> : null}
       {!error ? (
         workouts.map((workout) => (
-          <div key={workout._id} className="unit-workout">
+          <div
+            key={workout._id ? workout._id : workout.title}
+            className="unit-workout"
+          >
             <div>
               <h2>title: {workout.title}</h2>
               <h3>reps: {workout.reps}</h3>

@@ -13,6 +13,10 @@ const workoutSchema = new Schema(
       type: Number,
       required: true,
     },
+    userId: {
+      type: mongoose.SchemaTypes.ObjectId,
+      required: true,
+    },
   },
   { timestamps: true }
 );

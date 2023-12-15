@@ -1,19 +1,33 @@
 const workOutModel = require("../models/workoutModel");
 const mongoose = require("mongoose");
+const Joi = require("joi");
 
 //get all work out
 
 const getAllWorkOuts = async (req, res) => {
-  const workouts = await workOutModel.find({}).sort({ createdAt: -1 });
-  res.status(200).json(workouts);
+  // console.log(req.user._id);
+  if (mongoose.Types.ObjectId.isValid(req.user._id)) {
+    const workouts = await workOutModel
+      .find({ userId: req.user._id })
+      .sort({ createdAt: -1 });
+    res.status(200).json(workouts);
+  }
 };
 
 //add new work out
 const createWorkouts = async (req, res) => {
+  const { error, value } = validateForm(req.body);
+  if (error) {
+    res.status(400).send(error.details[0].message);
+    return;
+  }
   const { title, reps, load } = req.body;
+  const userId = req.user._id;
+
+  console.log(req.user);
 
   try {
-    const workout = await workOutModel.create({ title, reps, load });
+    const workout = await workOutModel.create({ title, reps, load, userId });
     res.status(200).json(workout);
   } catch (error) {
     res.status(400).json({ error: error.message });
@@ -71,6 +85,16 @@ const deleteWorkout = async (req, res) => {
     return res.status(400).json({ error: "no workout with that id" });
   }
   res.status(200).json(targetWorkout);
+};
+
+const validateForm = (workoutInp) => {
+  const schema = Joi.object({
+    title: Joi.string().min(5).required(),
+    reps: Joi.number().min(1).required(),
+    load: Joi.number().required(),
+  });
+
+  return schema.validate(workoutInp);
 };
 
 module.exports = {

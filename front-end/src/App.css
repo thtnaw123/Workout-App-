@@ -1,6 +1,15 @@
 .App {
-  height: 10%;
+  height: 80dvh;
   display: flex;
-  justify-content: space-around;
+  justify-content: center;
   align-items: center;
+}
+
+.workoutContent h1 {
+  text-align: center;
+}
+
+header {
+  display: flex;
+  justify-content: center;
 }
